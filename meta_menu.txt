@@ -1,0 +1,125 @@
+
+    typename T, typename Cont = list<T>
+    Meta_menu
+            |
+            | - public:
+            |
+            | --- insert( iterator, const T& ) : iterator
+            |
+            | --- insert( const int, const T& ) : iterator
+            |
+            | --- insert( const_iterator pos, initializer_list i_list ) : iterator
+            |
+            | --- insert( const int pos, initializer_list i_list ) : iterator
+            |
+            | --- push_back( const T& ) : void
+            |
+            | --- push_back( T&& ) : void
+            |
+            | --- push_front( const T& ) : void
+            |
+            | --- push_front( T&& ) : void
+            |
+            | --- call( iterator, Args&&... ) : result_type
+            |
+            | --- call( const int, Args&&... ) : result_type
+            |
+            | --- erase( const_iterator ) : iterator
+            |
+            | --- erase( const int ) : iterator
+            |
+            | --- erase( const_iterator, const_iterator ) : iterator
+            |
+            | --- size() const noexcept : size_t
+            |
+            | --- begin() noexcept : iterator
+            | --- end() noexcept : iterator
+            | --- cbegin() noexcept : const_iterator
+            | --- cend() noexcept : const_iterator
+            | --- rbegin() noexcept : reverse_iterator
+            | --- rend() noexcept : reverse_iterator
+            | --- crbegin() noexcept : const_reverse_iterator
+            | --- crend() noexcept : const_reverse_iterator
+            |
+            | - aliases:
+            |
+            | --- iterator = functions::iterator
+            | --- const_iterator = functions::const_iterator
+            | --- reverse_iterator = functions::reverse_iterator
+            | --- const_reverse_iterator = functions::const_reverse_iterator
+            | --- result_type = T::result_type
+            |
+            | - private:
+            |
+            | --- functions : list<T>
+            
+    Класс для создания меню,
+    принимает шаблонный параметр в виде std::function
+    
+public:
+    
+    insert( const_iterator pos, const T& value ) : iterator
+        Возвращает functions.insert( pos, value )
+    
+    insert( const int pos, const T& value ) : iterator
+        Переводит pos в тип iterator 
+        и передаёт в функцию insert( iterator, value )
+        Если позиция невалидна, то нормальная работа функции не гарантируется.
+        
+    insert( const_iterator pos, initializer_list i_list ) : iterator
+        Возвращает functions.insert( pos, i_list )
+        
+    insert( const int pos, initializer_list i_list ) : iterator
+        Переводит pos в тип iterator
+        и передаёт в функцию insert( iterator, i_list )
+        Если позиция невалидна, то нормальная работа функции не гарантируется.
+        
+    push_back( const T& value ) : void
+        Вызывает функцию functions.push_back( value )
+        
+    push_back( T&& value ) : void
+        Вызывает функцию functions.push_back( value )
+        
+    push_front( const T& value ) : void
+        Вызывает функцию functions.push_front( value )
+        
+    push_front( T&& value ) : void
+        Вызывает функцию functions.push_front( value )
+        
+    call( const iterator pos, Args&&... args ) : result_type
+        Возвращает результат работы функции с параметрами args,
+        находящейся в pos.
+        
+    call( const int pos, Args&&... args ) : result_type
+        Возвращает результат работы функции с параметрами args
+        в позиции pos.
+        Если позиция невалидна, то нормальная работа функции не гарантируется.
+    
+    erase( const_iterator pos ) : iterator
+        Возвращает functions.erase( pos )
+        
+    erase( const int pos ) : iterator
+        Переводит pos в iterator
+        и вызывает erase( iterator )
+        Если позиция невалидна, то нормальная работа функции не гарантируется.
+    
+    erase( const_iterator from, const_iterator to )
+        Возвращает functions.erase( from, to )
+        
+    size() const noexcept : size_t
+        Возвращает functions.size();
+        
+    begin() noexcept : iterator
+    end() noexcept : iterator
+    cbegin() noexcept : const_iterator
+    cend() noexcept : const_iterator
+    rbegin() noexcept : reverse_iterator
+    rend() noexcept : reverse_iterator
+    crbegin() noexcept : const_reverse_iterator
+    crend() noexcept : const_reverse_iterator
+        Возвращают аналогичные функции functions.
+        
+private:
+    
+    functions : Cont
+        Контейнер, хранящий функции.
