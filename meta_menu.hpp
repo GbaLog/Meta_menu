@@ -67,7 +67,7 @@ namespace tools
         template<typename... Args>
         result_type call( iterator pos, Args&&... args )
         {
-            return (*pos)( std::forward<Args>(args...)... );
+            return (*pos)( std::forward<Args>(args)... );
         }
         //-------------------------------------------------------------------------------
         template<typename... Args>
@@ -75,7 +75,7 @@ namespace tools
         {
             auto iter = functions.begin();
             std::advance( iter, pos - 1 );
-            return call( iter, std::forward<Args>(args...)... );
+            return call( iter, std::forward<Args>(args)... );
         }
         //-------------------------------------------------------------------------------
         iterator erase( const_iterator pos )
