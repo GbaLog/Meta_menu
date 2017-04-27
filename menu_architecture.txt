@@ -1,6 +1,6 @@
 
     typename T, typename Cont = list<T>
-    Meta_menu
+    Menu
             |
             | - public:
             |
